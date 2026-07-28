@@ -89,9 +89,13 @@ namespace Calcita.Main
 		void ClearActionHistoryForWorksheet(Worksheet sheet);
 	}
 
-	internal interface IVisualWorkbook : IScrollableWorksheetContainer
-	{
-		Worksheet CurrentWorksheet { get; set; }
+    public interface ICurrentWorksheetProvider
+    {
+        Worksheet CurrentWorksheet { get; set; }
+    }
+
+    internal interface IVisualWorkbook : IScrollableWorksheetContainer, ICurrentWorksheetProvider
+    {		
 	}
 
 	internal interface IScrollableWorksheetContainer
