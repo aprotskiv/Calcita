@@ -150,6 +150,7 @@ namespace Calcita.Controls
 
             this.horScrollbar?.Scroll += horScrollBar_Scroll;
             this.verScrollbar?.Scroll += verScrollBar_Sroll;
+            
             this.sheetTab?.NewSheetClick += this.SheetTab_NewSheetClick;
             this.sheetTab?.TabMoved += this.SheetTab_TabMoved;
 

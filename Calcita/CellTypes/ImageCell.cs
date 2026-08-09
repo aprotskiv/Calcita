@@ -35,12 +35,24 @@ namespace Calcita.CellTypes
     /// <summary>
     /// Representation for an image of cell body
     /// </summary>
+    [Serializable]
     public class ImageCell : CellBody
     {
+        [NonSerialized]
+        private RGImage image;
+
         /// <summary>
         /// Get or set the image to be displayed in cell
         /// </summary>
-        public RGImage Image { get; set; }
+        public RGImage Image {
+            get {
+                return image;
+            }
+            set
+            {
+                image = value;
+            }
+        }
 
         #region Constructor
         /// <summary>

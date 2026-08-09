@@ -25,6 +25,12 @@ using Calcita.Interaction;
 using Avalonia.Input.Platform;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Avalonia.Media.Imaging;
+using System.IO;
+using System.IO.Compression;
+
+
+
 
 
 
@@ -324,11 +330,38 @@ namespace Calcita
                         {
                             clipboardText = data.GetText();
                         }
+                        else if (data.ContainsImage())
+                        {
+                          using (var bmp = new MemoryStream())
+                          {
+                            var enc = new PngBitmapEncoder(); // it is bitmap !!! See Clipboard.GetImage()                
+                            enc.Frames.Add(BitmapFrame.Create(Clipboard.GetImage()));
+                            enc.Save(bmp);
+                            clipboardText = Convert.ToBase64String(bmp.ToArray());
+                          }
+                        }
                     }
 #elif AVALONIA
                     var clipboard = TopLevel.GetTopLevel(ControlAdapter.ControlInstance as Control)?.Clipboard;
-                    //partialGrid = clipboard.GetDataAsync(ClipBoardDataFormatIdentify).Result as PartialGrid;
-                    //clipboardText = clipboard.GetDataAsync(ClipBoardDataFormatIdentify).Result as String;
+                    if (clipboard != null)
+                    {
+                        if (clipboard.TryGetTextAsync().Result is string clipboardText0)
+                        {
+                            clipboardText = clipboardText0;
+                        }
+                        else if (clipboard.TryGetBitmapAsync().Result is Avalonia.Media.Imaging.Bitmap clipboardBitmap)
+                        {
+                            using (var bmp = new MemoryStream())
+                            {
+                                var options = new PngBitmapEncoderOptions
+                                {
+                                    CompressionLevel = CompressionLevel.Optimal // Best compression ratio
+                                };
+                                clipboardBitmap.Save(bmp, options);
+                                clipboardText = Convert.ToBase64String(bmp.ToArray());
+                            }
+                        }
+                    }                    
 
                     var transfer = clipboard?.TryGetInProcessDataAsync().Result! as PartialGridTransfer;
                     partialGrid = transfer?.Grid;
@@ -361,7 +394,7 @@ namespace Calcita
 
                         var targetRange = new RangePosition(startRow, startCol, rows, cols);
 
-                        if (!RaiseBeforePasteEvent(targetRange))
+                        if (!RaiseBeforePasteEvent(targetRange, data: (object)clipboardText ?? partialGrid)) // pass string or entire 'partialGrid'
                         {
                             return false;
                         }
@@ -462,7 +495,7 @@ namespace Calcita
                         int cols = Math.Max(selectionRange.Cols, arrayData.GetLength(1));
 
                         var targetRange = new RangePosition(selectionRange.Row, selectionRange.Col, rows, cols);
-                        if (!RaiseBeforePasteEvent(targetRange))
+                        if (!RaiseBeforePasteEvent(targetRange, data: clipboardText))
                         {
                             return false;
                         }
@@ -504,11 +537,11 @@ namespace Calcita
             return true;
         }
 
-        private bool RaiseBeforePasteEvent(RangePosition range)
+        private bool RaiseBeforePasteEvent(RangePosition range, object data)
         {
             if (BeforePaste != null)
             {
-                var evtArg = new BeforeRangeOperationEventArgs(range);
+                var evtArg = new BeforePasteRangeEventArgs(range, data);
                 BeforePaste(this, evtArg);
                 if (evtArg.IsCancelled)
                 {
@@ -656,7 +689,7 @@ namespace Calcita
         /// <summary>
         /// Before a range will be pasted from Clipboard
         /// </summary>
-        public event EventHandler<BeforeRangeOperationEventArgs> BeforePaste;
+        public event EventHandler<BeforePasteRangeEventArgs> BeforePaste;
 
         /// <summary>
         /// When a range has been pasted into grid

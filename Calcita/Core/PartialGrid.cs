@@ -138,12 +138,7 @@ namespace Calcita
 		}
 
 		private CellArray cells;
-#if DEBUG
-		public
-#else
-		internal
-#endif
-		CellArray Cells
+		public CellArray Cells
 		{
 			get { return cells; }
 			set { cells = value; }
