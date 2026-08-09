@@ -244,7 +244,7 @@ namespace Calcita
                     // set object data into clipboard
                     Clipboard.SetDataObject(data);
 #elif AVALONIA
-                    var grid = this.Workbook.PartialGridFactory.GetPartialGrid(this, 
+                    var grid = this.Workbook.PartialGridFactory.GetPartialGrid_ForCopyAction(this, 
                         currentCopingRange, PartialGridCopyFlag.All, ExPartialGridCopyFlag.None, true);
 
                     string text = StringifyRange(currentCopingRange);
