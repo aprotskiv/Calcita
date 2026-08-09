@@ -459,8 +459,9 @@ namespace Calcita
 
 					if (!object.Equals(data, backupData))
 					{
-						DoAction(new SetCellDataAction(currentEditingCell.InternalRow, currentEditingCell.InternalCol, data));
-					}
+                        var action = this.workbook.DataActionFactory.SetCellDataAction(currentEditingCell.InternalRow, currentEditingCell.InternalCol, data);
+                        DoAction(action);
+                    }
 
 					break;
 			}

@@ -151,7 +151,7 @@ namespace Calcita
 		/// </summary>
 		/// <param name="cell">Instance of cell.</param>
 		/// <param name="data">Data to be set.</param>
-		internal void SetSingleCellData(Cell cell, object data)
+		public void SetSingleCellData(Cell cell, object data)
 		{
 			// set cell body
 			if (data is ICellBody)
@@ -660,13 +660,13 @@ namespace Calcita
 
 		internal CellPosition InternalPos;
 
-		internal int InternalRow
+		public int InternalRow
 		{
 			get { return this.InternalPos.Row; }
 			set { this.InternalPos.Row = value; }
 		}
 
-		internal int InternalCol
+        public int InternalCol
 		{
 			get { return this.InternalPos.Col; }
 			set { this.InternalPos.Col = value; }
@@ -716,14 +716,14 @@ namespace Calcita
 
 #region Rowspan & Colspan
 		private short colspan;
-		internal short Colspan
+        public short Colspan
 		{
 			get { return colspan; }
 			set { colspan = value; }
 		}
 
 		private short rowspan;
-		internal short Rowspan
+        public short Rowspan
 		{
 			get { return rowspan; }
 			set { rowspan = value; }
@@ -814,14 +814,14 @@ namespace Calcita
 			set { dataFormatArgs = value; }
 		}
 
-#endregion // Data Format
+        #endregion // Data Format
 
-#region Data, Display
+        #region Data, Display
 
-		/// <summary>
-		/// cell data
-		/// </summary>
-		internal object InnerData { get; set; }
+        /// <summary>
+        /// cell data
+        /// </summary>
+        public object InnerData { get; set; }
 
 		/// <summary>
 		/// Get or set cell data
@@ -853,10 +853,10 @@ namespace Calcita
 			return CellUtility.ConvertData<T>(this.InnerData);
 		}
 
-		/// <summary>
-		/// cell formula
-		/// </summary>
-		internal string InnerFormula { get; set; }
+        /// <summary>
+        /// cell formula
+        /// </summary>
+        public string InnerFormula { get; set; }
 #if FORMULA
 
 		internal FormulaStatus formulaStatus;

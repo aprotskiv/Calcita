@@ -49,12 +49,13 @@
 		/// <summary>
 		/// Do this action
 		/// </summary>
-		public override void Do()
+		public override bool Do()
 		{
 			insertedRow = Row;
 			Worksheet.InsertRows(Row, Count);
 			Range = new RangePosition(Row, 0, Count, Worksheet.ColumnCount);
-		}
+            return true;
+        }
 
 		/// <summary>
 		/// Undo this action

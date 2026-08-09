@@ -51,14 +51,14 @@ namespace Calcita.Actions
 			set { data = value; }
 		}
 
-		private object backupData;
-		//private string backupFormula;
-		//private string displayBackup;
-		private CellDataFormatFlag backupDataFormat;
-		private object backupDataFormatArgs;
+        protected object backupData;
+        //private string backupFormula;
+        //private string displayBackup;
+        protected CellDataFormatFlag backupDataFormat;
+        protected object backupDataFormatArgs;
 		//private Core.ReoGridRenderHorAlign backupRenderAlign;
 		//private bool autoUpdateReferenceCells = false;
-		private ushort? backupRowHeight = 0;
+		protected ushort? backupRowHeight = 0;
 
 		/// <summary>
 		/// Create SetCellValueAction with specified index of row and column.
@@ -99,7 +99,7 @@ namespace Calcita.Actions
 		/// <summary>
 		/// Do this operation.
 		/// </summary>
-		public override void Do()
+		public override bool Do()
 		{
 			Cell cell = Worksheet.CreateAndGetCell(row, col);
 
@@ -124,13 +124,16 @@ namespace Calcita.Actions
 				{
 					cell.ExpandRowHeight();
 				}
-			}
+
+                return true;
+            }
 			catch (Exception ex)
 			{
 				this.Worksheet.NotifyExceptionHappen(ex);
 			}
 
-		}
+            return false;
+        }
 
 		public override void Redo()
 		{

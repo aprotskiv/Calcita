@@ -46,7 +46,7 @@ namespace Calcita.Actions
 		/// </summary>
 		PartialGrid backupedGrid;
 
-		public override void Do()
+		public override bool Do()
 		{
 			// Get a backup of target range that will be overwritten
 			backupedGrid = Worksheet.GetPartialGrid(TargetRange, PartialGridCopyFlag.CellData, ExPartialGridCopyFlag.None);
@@ -55,12 +55,15 @@ namespace Calcita.Actions
 			{
 				Worksheet.AutoFillSerial(SourceRange, TargetRange);
 				Worksheet.SelectionRange = RangePosition.Union(SourceRange, TargetRange);
-			}
+                return true;
+            }
 			catch (Exception ex)
 			{
 				Worksheet.NotifyExceptionHappen(ex);
 			}
-		}
+
+            return false;
+        }
 
 		public override void Undo()
 		{

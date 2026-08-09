@@ -84,7 +84,7 @@
 		/// <summary>
 		/// Do this action
 		/// </summary>
-		public override void Do()
+		public override bool Do()
 		{
 			backupData = Worksheet.GetPartialGrid(Range);
 
@@ -148,7 +148,8 @@
 			}
 
 			Worksheet.SetRangeStyles(affectedRange, style);
-		}
+            return true;
+        }
 
 		/// <summary>
 		/// Undo this action

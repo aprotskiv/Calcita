@@ -42,7 +42,7 @@ namespace Calcita.Actions
 		/// <summary>
 		/// Do this action
 		/// </summary>
-		public override void Do()
+		public override bool Do()
 		{
 			if (this.Worksheet != null)
 			{
@@ -59,8 +59,11 @@ namespace Calcita.Actions
 				}
 
 				this.Worksheet.ClearOutlines(this.rowOrColumn);
+                return true;
 			}
-		}
+
+            return false;
+        }
 
 		/// <summary>
 		/// Undo this action

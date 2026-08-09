@@ -37,10 +37,11 @@ namespace Calcita.Actions
 			this.Workbook = workbook;
 		}
 
-		/// <summary>
-		/// Do this action.
-		/// </summary>
-		public abstract void Do();
+        /// <summary>
+        /// Do this action.
+        /// </summary>
+        /// <returns>TRUE if performed action can be undone (can be reversed)</returns>
+        public abstract bool Do();
 
 		/// <summary>
 		/// Undo this action.

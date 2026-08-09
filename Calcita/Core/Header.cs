@@ -3226,7 +3226,7 @@ namespace Calcita
 		/// </summary>
 		public int Top { get; internal set; }
 
-		internal ushort InnerHeight { get; set; }
+		public ushort InnerHeight { get; set; }
 
 		/// <summary>
 		/// Get or set height of row. (in pixel)

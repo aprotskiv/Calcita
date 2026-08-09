@@ -72,17 +72,19 @@ namespace Calcita.Actions
 		/// <summary>
 		/// Do action to create column filter
 		/// </summary>
-		public override void Do()
+		public override bool Do()
 		{
 			if (this.autoColumnFilter == null)
 			{
 				this.autoColumnFilter = base.Worksheet.CreateColumnFilter(this.Range,
 					AutoColumnFilterUI.DropdownButtonAndPanel);
+                return false;
 			}
 			else
 			{
 				this.autoColumnFilter.Attach(base.Worksheet);
-			}
+                return true;
+            }
 		}
 
 		/// <summary>

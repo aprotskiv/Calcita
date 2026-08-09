@@ -39,14 +39,16 @@ namespace Calcita.Actions
 		/// <summary>
 		/// Do all actions stored in this action group
 		/// </summary>
-		public override void Do()
+		public override bool Do()
 		{
 			foreach (var action in Actions)
 			{
 				action.Worksheet = this.Worksheet;
 				action.Do();
 			}
-		}
+
+            return true;
+        }
 
 		/// <summary>
 		/// Undo all actions stored in this action group

@@ -45,10 +45,11 @@
 		/// <summary>
 		/// Do this action to remove worksheet
 		/// </summary>
-		public override void Do()
+		public override bool Do()
 		{
 			this.Workbook.RemoveWorksheet(this.Index);
-		}
+            return true;
+        }
 
 		/// <summary>
 		/// Undo this action to restore the removed worksheet

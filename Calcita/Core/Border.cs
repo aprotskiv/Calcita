@@ -33,7 +33,7 @@ using VBorderArray = Calcita.Data.ReoGridVBorderArray;
 namespace Calcita.Core
 {
 	[Serializable]
-	internal class ReoGridHBorder : BaseBorder
+	public class ReoGridHBorder : BaseBorder
 	{
 
 		private HBorderOwnerPosition pos;
@@ -56,7 +56,7 @@ namespace Calcita.Core
 	}
 
 	[Serializable]
-	internal class ReoGridVBorder : BaseBorder
+	public class ReoGridVBorder : BaseBorder
 	{
 		private VBorderOwnerPosition pos;
 
@@ -96,7 +96,7 @@ namespace Calcita.Core
 	}
 
 	[Serializable]
-	internal abstract class BaseBorder
+	public abstract class BaseBorder
 	{
 		public int Span { get; set; }
 

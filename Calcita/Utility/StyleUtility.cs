@@ -584,7 +584,11 @@ namespace Calcita.Utility
 					case ReoGridHorAlign.Right:
 						cell.RenderHorAlign = ReoGridRenderHorAlign.Right;
 						break;
-				}
+
+                    default:
+                        cell.RenderHorAlign = default(ReoGridRenderHorAlign);
+                        break;
+                }
 			}
 		}
 

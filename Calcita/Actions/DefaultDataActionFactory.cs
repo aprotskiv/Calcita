@@ -32,6 +32,8 @@
         /// <param name="range">range to set specified data.</param>
         /// <param name="data">data to be set.</param>
         WorksheetReusableAction SetRangeDataAction(RangePosition range, SetRangeDataActionContext data);
+
+        BaseWorksheetAction SetCellDataAction(int internalRow, int internalCol, object data);
     }
 
     /// <summary>
@@ -61,6 +63,12 @@
         public WorksheetReusableAction SetRangeDataAction(RangePosition range, SetRangeDataActionContext data)
         {
             return new SetRangeDataAction(range, data.Data);
+        }
+
+        /// <inheritdoc/>
+        public BaseWorksheetAction SetCellDataAction(int internalRow, int internalCol, object data)
+        {
+            return new SetCellDataAction(internalRow, internalCol, data);
         }
     }
 }

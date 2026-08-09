@@ -42,13 +42,14 @@
 		/// <summary>
 		/// Do this action
 		/// </summary>
-		public override void Do()
+		public override bool Do()
 		{
 			backupData = Worksheet.GetPartialGrid(Range, PartialGridCopyFlag.BorderAll,
 				ExPartialGridCopyFlag.BorderOutsideOwner);
 
 			Worksheet.RemoveRangeBorders(Range, BorderPos);
-		}
+            return true;
+        }
 
 		/// <summary>
 		/// Undo this action

@@ -44,7 +44,7 @@ namespace Calcita.Actions
 		/// <summary>
 		/// Do this action
 		/// </summary>
-		public override void Do()
+		public override bool Do()
 		{
 			Worksheet.StepRangeFont(Range, size =>
 			{
@@ -52,7 +52,8 @@ namespace Calcita.Actions
 						(size >= Toolkit.FontSizeList.Max()) ? size : Toolkit.FontSizeList.Where(f => f > size).Min()
 						: (size <= Toolkit.FontSizeList.Min()) ? size : Toolkit.FontSizeList.Where(f => f < size).Max();
 			});
-		}
+            return true;
+        }
 
 		/// <summary>
 		/// Undo this action

@@ -83,9 +83,12 @@ namespace Calcita.Common
 				if (arg.Cancel) return;
 			}
 
-			if (perform) action.Do();
+            if (perform)
+            {
+                isCanUndo = action.Do();
+            }
 
-			if (action is IUndoableAction && isCanUndo)
+            if (action is IUndoableAction && isCanUndo)
 			{
 				redoStack.Clear();
 				undoStack.Add(action as IUndoableAction);
@@ -254,16 +257,17 @@ namespace Calcita.Common
 	/// </summary>
 	public interface IAction
 	{
-		/// <summary>
-		/// Do this action.
-		/// </summary>
-		void Do();
+        /// <summary>
+        /// Do this action.
+        /// </summary>
+        /// <returns>TRUE if performed action can be undone (can be reversed)</returns>
+        bool Do();
 
-		/// <summary>
-		/// Get the friendly name of this action.
-		/// </summary>
-		/// <returns>Get friendly name of action.</returns>
-		string GetName();
+        /// <summary>
+        /// Get the friendly name of this action.
+        /// </summary>
+        /// <returns>Get friendly name of action.</returns>
+        string GetName();
 	}
 
 	/// <summary>
@@ -330,18 +334,21 @@ namespace Calcita.Common
 		public ActionGroup(string name)
 		{
 			actions = new List<IAction>();
-		}
+        }
 
-		/// <summary>
-		/// Do this action group. (Do all actions that are contained in this group)
-		/// </summary>
-		public virtual void Do()
-		{
+        /// <summary>
+        /// Do this action group. (Do all actions that are contained in this group)
+        /// </summary>
+        public virtual bool Do()
+        {
 			foreach (IAction action in actions)
 			{
-				action.Do();
-			}
-		}
+                var isCanUndo = action.Do();
+                // TODO: modify undo / redo stacks
+            }
+
+            return true;
+        }
 
 		/// <summary>
 		/// Undo this action group. (Undo all actions that are contained in this group)

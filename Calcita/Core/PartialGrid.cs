@@ -145,15 +145,15 @@ namespace Calcita
 		}
 
 		private HBorderArray hBorders;
-		internal HBorderArray HBorders
-		{
+        public HBorderArray HBorders
+        {
 			get { return hBorders; }
 			set { hBorders = value; }
 		}
 
 		private VBorderArray vBorders;
-		internal VBorderArray VBorders
-		{
+        public VBorderArray VBorders
+        {
 			get { return vBorders; }
 			set { vBorders = value; }
 		}
@@ -522,13 +522,13 @@ namespace Calcita
 			return this.SetPartialGrid(toRange, data, PartialGridCopyFlag.All, ExPartialGridCopyFlag.None);
 		}
 
-		internal RangePosition SetPartialGrid(RangePosition toRange, PartialGrid data,
+        public RangePosition SetPartialGrid(RangePosition toRange, PartialGrid data,
 			PartialGridCopyFlag flag)
 		{
 			return this.SetPartialGrid(toRange, data, flag, ExPartialGridCopyFlag.None);
 		}
 
-		internal RangePosition SetPartialGrid(RangePosition toRange, PartialGrid data,
+        public RangePosition SetPartialGrid(RangePosition toRange, PartialGrid data,
 			PartialGridCopyFlag flag, ExPartialGridCopyFlag exFlag)
 		{
 			if (toRange.IsEmpty) return toRange;

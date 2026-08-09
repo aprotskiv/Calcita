@@ -45,20 +45,23 @@ namespace Calcita.Actions
 		/// <summary>
 		/// Do action to set data into specified range of spreadsheet
 		/// </summary>
-		public override void Do()
+		public override bool Do()
 		{
 			backupData = Worksheet.GetRangeData(range);
 			Debug.Assert(backupData != null);
 			Worksheet.SetRangeData(range, data, true);
 
-			if (isRegularExecution)
-			{
-				isRegularExecution = false;
-				return;
-			}
+            if (isRegularExecution)
+            {
+                isRegularExecution = false;
+            }
+            else
+            {
+                Worksheet.SelectRange(range);
+            }
 
-			Worksheet.SelectRange(range);
-		}
+            return true;
+        }
 
 		/// <summary>
 		/// Undo action to remove data which has been set into specified range of spreadsheet

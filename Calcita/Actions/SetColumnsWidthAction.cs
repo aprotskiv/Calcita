@@ -45,7 +45,7 @@ namespace Calcita.Actions
 		/// <summary>
 		/// Do this action
 		/// </summary>
-		public override void Do()
+		public override bool Do()
 		{
 			int col = base.Range.Col;
 			int count = base.Range.Cols;
@@ -60,7 +60,9 @@ namespace Calcita.Actions
 			}
 
 			Worksheet.SetColumnsWidth(col, count, width);
-		}
+
+            return true;
+        }
 
 		private Dictionary<int, ushort> backupCols = new Dictionary<int, ushort>();
 

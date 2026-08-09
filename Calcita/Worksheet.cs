@@ -2031,7 +2031,7 @@ namespace Calcita
         /// </summary>
         public event EventHandler Resetted;
 
-        internal void NotifyExceptionHappen(Exception ex)
+        public void NotifyExceptionHappen(Exception ex)
         {
             if (this.workbook != null)
             {
@@ -2043,6 +2043,8 @@ namespace Calcita
 
         #region Settings
         internal WorksheetSettings settings;
+
+        public WorksheetSettings Settings { get { return settings; } /* set { this.settings = value; } */ }
 
         //[DefaultValue(WorksheetSettings.Default)]
         //internal WorksheetSettings Settings { get { return settings; } set { this.settings = value; } }

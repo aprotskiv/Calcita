@@ -27,7 +27,7 @@ namespace Calcita.Actions
             this.backupData = data;
         }
 
-        public override void Do()
+        public override bool Do()
         {
             backupData = Worksheet.GetPartialGrid(base.Range, PartialGridCopyFlag.All, ExPartialGridCopyFlag.BorderOutsideOwner);
             Debug.Assert(backupData != null);
@@ -35,6 +35,7 @@ namespace Calcita.Actions
             this.Worksheet.DeleteRangeData(base.Range, true);
             this.Worksheet.RemoveRangeStyles(base.Range, PlainStyleFlag.All);
             this.Worksheet.RemoveRangeBorders(base.Range, BorderPositions.All);
+            return true;
         }
 
         public override void Undo()
