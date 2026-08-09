@@ -510,7 +510,8 @@ namespace Calcita
 
                             if (actionSupportedControl != null)
                             {
-                                actionSupportedControl.DoAction(this, this.Workbook.DataActionFactory.SetRangeDataAction(targetRange, arrayData));
+                                var setRangeDataAction = this.Workbook.DataActionFactory.SetRangeDataAction(targetRange, new SetRangeDataActionContext(arrayData));
+                                actionSupportedControl.DoAction(this, setRangeDataAction);
                             }
                         }
                         #endregion // Plain Text Pasting
