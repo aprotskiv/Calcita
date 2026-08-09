@@ -509,11 +509,16 @@ namespace Calcita.Events
 		/// </summary>
 		public CellDataFormatFlag? DataFormat { get; set; }
 
-		/// <summary>
-		/// Create instance for CellAfterEditEventArgs
-		/// </summary>
-		/// <param name="cell">Cell edited by user</param>
-		public CellAfterEditEventArgs(Cell cell) : base(cell) { }
+        /// <summary>
+        /// Indicates whether cell data has not been changed
+        /// </summary>
+        public bool Unchanged { get; set; }
+
+        /// <summary>
+        /// Create instance for CellAfterEditEventArgs
+        /// </summary>
+        /// <param name="cell">Cell edited by user</param>
+        public CellAfterEditEventArgs(Cell cell) : base(cell) { }
 	}
 
 	/// <summary>
