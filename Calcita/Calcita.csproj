@@ -42,14 +42,14 @@
 		<PackageTags>calcita spreadsheet excel drawing grid workbook worksheet chart data formula script macro outline print</PackageTags>
 		<PackageReleaseNotes>Initial Calcita package based on ReoGrid sources.</PackageReleaseNotes>
 	</PropertyGroup>
-	
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AvaloniaDebug|AnyCPU'">
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AvaloniaDebug|AnyCPU' OR '$(Configuration)|$(Platform)'=='Debug|AnyCPU' OR '$(Configuration)|$(Platform)'=='Debug_VLC_off|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;AVALONIA;GLOBALUSING;VP_DEBUG_OFF;ALWAYS_CELL_CLIP;FORMULA;LANG_JP;OUTLINE;DRAWING;COMMENT;RICHTEXT;</DefineConstants>
     <LangVersion>default</LangVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AvaloniaRelease|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AvaloniaRelease|AnyCPU' OR '$(Configuration)|$(Platform)'=='Release|AnyCPU' OR '$(Configuration)|$(Platform)'=='Release_VLC_off|AnyCPU'">
     <DefineConstants>TRACE;AVALONIA;GLOBALUSING;FORMULA;LANG_JP;OUTLINE;DRAWING;RICHTEXT;</DefineConstants>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile></AssemblyOriginatorKeyFile>
