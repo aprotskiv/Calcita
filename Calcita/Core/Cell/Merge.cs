@@ -91,7 +91,16 @@ namespace Calcita
 		{
 			get { return IsStartMergedCell || (rowspan == 0 && colspan == 0); }
 		}
-	}
+
+        /// <summary>
+        /// for Copy | Paste operation
+        /// </summary>
+        public void UnMergeCell()
+        {
+            rowspan = 1;
+            colspan = 1;
+            MergeStartPos = CellPosition.Empty;
+            MergeEndPos = CellPosition.Empty;
+        }
+    }
 }
-
-
