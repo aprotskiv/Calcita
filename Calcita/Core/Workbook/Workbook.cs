@@ -1,4 +1,11 @@
-﻿/*****************************************************
+﻿using Calcita.Actions.unvell.ReoGrid;
+using Calcita.Common;
+using Calcita.Core;
+using Calcita.Events;
+using Calcita.Interaction;
+using Calcita.IO;
+using Calcita.Main;
+/*****************************************************
  * 
  * ReoGrid - .NET Spreadsheet Control
  * 
@@ -20,12 +27,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-
-using Calcita.Common;
-using Calcita.Events;
-using Calcita.IO;
-using Calcita.Main;
-using Calcita.Interaction;
 
 #if PRINT
 using Calcita.Print;
@@ -56,13 +57,18 @@ namespace Calcita
 				}
 			}
 		}
-		#endregion // Readonly
+        #endregion // Readonly
 
-		/// <summary>
-		/// Create workbook instance
-		/// </summary>
-		/// <param name="adapter">Control instance adapter</param>
-		public Workbook()
+        public IDataActionFactory DataActionFactory { get; set; } = new DefaultDataActionFactory();
+
+        public IPartialGridFactory PartialGridFactory { get; set; } = new DefaultPartialGridFactory();
+
+
+        /// <summary>
+        /// Create workbook instance
+        /// </summary>
+        /// <param name="adapter">Control instance adapter</param>
+        public Workbook()
 		{
   
 		}

@@ -27,7 +27,9 @@ using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Media;
 using Avalonia.Styling;
 using Avalonia.Threading;
+using Calcita.Actions.unvell.ReoGrid;
 using Calcita.AvaloniaPlatform;
+using Calcita.Core;
 using Calcita.Graphics;
 using Calcita.Interaction;
 using Calcita.Main;
@@ -218,6 +220,11 @@ namespace Calcita.Controls
         }
 
         #region Workbook
+
+        public IDataActionFactory DataActionFactory { get; set; } = new DefaultDataActionFactory();
+
+        public IPartialGridFactory PartialGridFactory { get; set; } = new DefaultPartialGridFactory();
+
 
         /// <summary>
         /// Workbook StyledProperty definition

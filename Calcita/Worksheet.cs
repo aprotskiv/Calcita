@@ -1804,7 +1804,7 @@ namespace Calcita
                             var actionSupportedControl = this.controlAdapter.ControlInstance as IActionControl;
                             if (actionSupportedControl != null)
                             {
-                                actionSupportedControl.DoAction(this, new RemoveRangeDataAction(this.selectionRange, keyData));
+                                actionSupportedControl.DoAction(this, this.workbook.DataActionFactory.RemoveRangeDataAction(this.selectionRange, keyData));
                             }
                         }
                         break;

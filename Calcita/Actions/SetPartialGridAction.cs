@@ -23,8 +23,8 @@ namespace Calcita.Actions
 	/// </summary>
 	public class SetPartialGridAction : WorksheetReusableAction
 	{
-		private PartialGrid data;
-		private PartialGrid backupData;
+		protected PartialGrid data;
+        private PartialGrid backupData;
 
 		/// <summary>
 		/// Create action to set partial grid.

@@ -18,7 +18,7 @@
 
 namespace Calcita.Actions
 {
-    internal class CutRangeAction : WorksheetReusableAction
+    public class CutRangeAction : WorksheetReusableAction
     {
         private PartialGrid backupData;
 

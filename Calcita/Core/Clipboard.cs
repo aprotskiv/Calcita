@@ -235,8 +235,8 @@ namespace Calcita
 
 #if WINFORM || WPF
                     DataObject data = new DataObject();
-                    data.SetData(ClipBoardDataFormatIdentify,
-                        GetPartialGrid(currentCopingRange, PartialGridCopyFlag.All, ExPartialGridCopyFlag.None, true));
+                    data.SetData(ClipBoardDataFormatIdentify, 
+                        this.Workbook.PartialGridFactory.GetPartialGrid(this, currentCopingRange, PartialGridCopyFlag.All, ExPartialGridCopyFlag.None, true));
 
                     string text = StringifyRange(currentCopingRange);
                     if (!string.IsNullOrEmpty(text)) data.SetText(text);
@@ -244,14 +244,15 @@ namespace Calcita
                     // set object data into clipboard
                     Clipboard.SetDataObject(data);
 #elif AVALONIA
-                    var grid = GetPartialGrid(currentCopingRange, PartialGridCopyFlag.All, ExPartialGridCopyFlag.None, true);
+                    var grid = this.Workbook.PartialGridFactory.GetPartialGrid(this, 
+                        currentCopingRange, PartialGridCopyFlag.All, ExPartialGridCopyFlag.None, true);
 
-                    //string text = StringifyRange(currentCopingRange);
+                    string text = StringifyRange(currentCopingRange);
                     //if (!string.IsNullOrEmpty(text))
                     //    data.Set(ClipBoardDataFormatIdentify, text);
 
                     var clipboard = TopLevel.GetTopLevel(ControlAdapter.ControlInstance as Control)?.Clipboard;
-                    clipboard!.SetDataAsync(new PartialGridTransfer(grid)).Wait();
+                    clipboard!.SetDataAsync(new PartialGridTransfer(grid, text)).Wait();
 
 #endif // WINFORM || WPF
 
@@ -365,6 +366,10 @@ namespace Calcita
 
                     var transfer = clipboard?.TryGetInProcessDataAsync().Result! as PartialGridTransfer;
                     partialGrid = transfer?.Grid;
+                    if (transfer != null)
+                    {
+                        clipboardText = transfer.Text;
+                    }
 #elif ANDROID
 
 #endif // WINFORM || WPF
@@ -480,8 +485,7 @@ namespace Calcita
 
                         if (!cancelPerformPaste)
                         {
-                            DoAction(new SetPartialGridAction(new RangePosition(
-                                startRow, startCol, rows, cols), partialGrid));
+                            DoAction(this.Workbook.DataActionFactory.SetPartialGridAction(targetRange, partialGrid));
                         }
 
                         #endregion // Partial Grid Pasting
@@ -506,7 +510,7 @@ namespace Calcita
 
                             if (actionSupportedControl != null)
                             {
-                                actionSupportedControl.DoAction(this, new SetRangeDataAction(targetRange, arrayData));
+                                actionSupportedControl.DoAction(this, this.Workbook.DataActionFactory.SetRangeDataAction(targetRange, arrayData));
                             }
                         }
                         #endregion // Plain Text Pasting
@@ -620,7 +624,7 @@ namespace Calcita
 
                     if (byAction)
                     {
-                        DoAction(new CutRangeAction(range, partialGrid));
+                        DoAction(this.Workbook.DataActionFactory.CutRangeAction(range, partialGrid));
                     }
                     else
                     {
@@ -725,9 +729,12 @@ namespace Calcita
         #endregion // Events
     }
 
-    class PartialGridTransfer(PartialGrid grid) : IAsyncDataTransfer
+    class PartialGridTransfer(PartialGrid grid, string text) : IAsyncDataTransfer
     {
         public PartialGrid Grid { get; } = grid;
+
+        public string Text { get; } = text;
+
         IReadOnlyList<Avalonia.Input.DataFormat> IAsyncDataTransfer.Formats { get; } = [];
         IReadOnlyList<IAsyncDataTransferItem> IAsyncDataTransfer.Items { get; } = [];
 

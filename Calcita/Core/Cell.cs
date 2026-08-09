@@ -649,7 +649,7 @@ namespace Calcita
 		/// Cell instance managed by ReoGrid core, it cannot be created by user-code.
 		/// </summary>
 		/// <param name="worksheet">Owner grid control for this cell</param>
-		internal Cell(Worksheet worksheet)
+		public Cell(Worksheet worksheet)
 		{
 			this.worksheet = worksheet;
 			this.FontDirty = true;

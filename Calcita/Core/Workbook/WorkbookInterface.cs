@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Calcita.Actions.unvell.ReoGrid;
+using Calcita.Core;
+using Calcita.Events;
+using Calcita.IO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-using Calcita.Events;
-using Calcita.IO;
 
 #if WINFORM || WPF
 using ControlType = Calcita.ReoGridControl;
@@ -204,10 +205,14 @@ namespace Calcita
 		/// </summary>
 		WorksheetCollection Worksheets { get; }
 
-		/// <summary>
-		/// Determine whether or not this workbook is read-only
-		/// </summary>
-		bool Readonly { get; set; }
+        IPartialGridFactory PartialGridFactory { get; set; }
+
+        IDataActionFactory DataActionFactory { get; set; }
+
+        /// <summary>
+        /// Determine whether or not this workbook is read-only
+        /// </summary>
+        bool Readonly { get; set; }
 
 		/// <summary>
 		/// Reset this workbook (Clear all worksheets and put one new)

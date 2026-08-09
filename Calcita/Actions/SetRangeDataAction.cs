@@ -23,15 +23,15 @@ namespace Calcita.Actions
 	/// </summary>
 	public class SetRangeDataAction : WorksheetReusableAction
 	{
-		private object[,] data;
-		private object[,] backupData;
+        protected object[,] data;
+        protected object[,] backupData;
 
-		/// <summary>
-		/// Create action to set data into specified range of spreadsheet.
-		/// </summary>
-		/// <param name="range">range to set specified data.</param>
-		/// <param name="data">data to be set.</param>
-		public SetRangeDataAction(RangePosition range, object[,] data)
+        /// <summary>
+        /// Create action to set data into specified range of spreadsheet.
+        /// </summary>
+        /// <param name="range">range to set specified data.</param>
+        /// <param name="data">data to be set.</param>
+        public SetRangeDataAction(RangePosition range, object[,] data)
 			: base(range)
 		{
 			this.data = data;

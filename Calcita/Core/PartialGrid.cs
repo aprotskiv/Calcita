@@ -95,7 +95,7 @@ namespace Calcita
 		VBorder = 0x20,
 	}
 
-	internal enum ExPartialGridCopyFlag
+	public enum ExPartialGridCopyFlag
 	{
 		None,
 
