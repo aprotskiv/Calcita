@@ -34,7 +34,7 @@ using Calcita.Print;
 
 namespace Calcita
 {
-    public sealed partial class Workbook : IWorkbook
+    public partial class Workbook : IWorkbook
 	{
 		internal List<Worksheet> worksheets = [];
 
